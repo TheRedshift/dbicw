@@ -23,3 +23,4 @@ else
     echo htmlspecialchars($conn->error);
 }
 
+header('Location: ArtistPage.php?success=1');

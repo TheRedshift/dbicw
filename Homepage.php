@@ -7,6 +7,7 @@
 
 <?php
 include('background.php');
+include 'db.php';
 ?>
 
 <body>
@@ -14,7 +15,60 @@ include('background.php');
 <br>
 
 <h1>Welcome to the Compendium's database management system. </h1> <br>
+<?php
 
+
+
+// Create connection
+$sql = "SELECT COUNT(artID) FROM artist;";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+    foreach ($row as $r)
+    {
+        $artIDCount = $r;
+    }
+    print "\n";
+}
+if (!$result) echo "failed to search record - are you sure the artist is in the system?";
+
+// Create connection
+$sql = "SELECT COUNT(cdID) FROM CD;";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+    foreach ($row as $r)
+    {
+        $cdIDCount = $r;
+    }
+    print "\n";
+}
+if (!$result) echo "failed to search record - are you sure the artist is in the system?";
+
+
+// Create connection
+$sql = "SELECT COUNT(trackID) FROM tracks;";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+    foreach ($row as $r)
+    {
+        $trackIDCount = $r;
+    }
+    print "\n";
+}
+if (!$result) echo "failed to search record - are you sure the artist is in the system?";
+
+
+
+
+?>
 
 <table width="300">
     <tr>
@@ -23,18 +77,18 @@ include('background.php');
 
     </tr>
     <tr>
-        <th>0</th>
-        <td>Bakken</td>
+        <th>Artists</th>
+        <td><?php echo $artIDCount ?></td>
 
     </tr>
     <tr>
-        <th>1</th>
-        <td>Merz</td>
+        <th>CDs</th>
+        <td><?php echo $cdIDCount ?></td>
 
     </tr>
     <tr>
-        <th>2</th>
-        <td>Daniel</td>
+        <th>Tracks</th>
+        <td><?php echo $trackIDCount ?></td>
 
     </tr>
 </table>

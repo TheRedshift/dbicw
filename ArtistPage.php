@@ -8,6 +8,17 @@
 <?php
 include('background.php');
 #include 'db.php';
+if ( isset($_GET['success']) && $_GET['success'] == 1 )
+{
+    // treat the success case ex:
+    $message = "Artist Successfully added!";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == -1 )
+{
+    $message = "Something appears to have gone wrong - please try again.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
 ?>
 
 <body>
@@ -51,13 +62,15 @@ include('background.php');
 
     <p>
         Artist name:
-        <input type="text" name="artist" />
+        <input type="text" name="artist" autofocus minlength="1" maxlength="254" required/>
     </p>
 
     <p>
         <input type="submit" value="Insert" />
     </p>
 </form>
+
+
 
 </body>
 </html>
