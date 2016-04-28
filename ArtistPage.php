@@ -19,6 +19,16 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
     $message = "Something appears to have gone wrong - please try again.";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
+else if ( isset($_GET['success']) && $_GET['success'] == -2 )
+{
+    $message = "Deleting entry failed - please try again.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == 2 )
+{
+    $message = "Entry successfully deleted.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
 ?>
 
 <body>
@@ -48,10 +58,13 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<table><tr><th>artID</th><th>artName</th></tr>";
+        echo "<table><tr><th>artID</th><th>artName</th><th>Remove</th></tr>";
         // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row["artID"]."</td><td>".$row["artName"];
+        while($row = $result->fetch_assoc())
+        {
+            $temp = 'deleteArtist.php?delete='.$row["artID"];
+            echo "<tr><td>".$row["artID"]."</td><td>".$row["artName"]
+                ."</td><td>"."<a href='$temp'>Delete Entry</a>";
         }
         echo "</table>";
     } else {

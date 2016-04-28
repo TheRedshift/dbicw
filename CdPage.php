@@ -64,7 +64,7 @@ $conn->close();
     <h1>Add a CD to the database.</h1> <br><br>
     <p>
         CD title:
-        <input type="text" name="cd" />
+        <input type="text" name="cd" required minlength="1"/>
     </p>
 
     <p>
@@ -83,7 +83,7 @@ $conn->close();
         }
         ?>
         Artist:
-        <select name="artist" id="artist">
+        <select name="artist" id="artist" required>
             <option selected="selected">Choose one</option>
 
             <?php
@@ -100,7 +100,7 @@ $conn->close();
 
     <p>
         CD Price (pennies):
-        <input type="number" min = 0 step = 1 name = "price">
+        <input type="number" min = 0 step = 1 name = "price" required/>
     </p>
 
     <p>
@@ -115,7 +115,7 @@ $conn->close();
 
     <p>
         Number of tracks:
-        <input type="number" min = 1 name = "tracks">
+        <input type="number" min = 1 step = 1 name = "tracks" required/>
     </p>
 
     <p>

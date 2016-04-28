@@ -7,6 +7,11 @@
  */
 
 include 'db.php'; // include our database connection
+
+
+
+
+
 $artistName = $_GET['artist'];
 
 $sql = "INSERT INTO artist (artName) VALUES (?)";

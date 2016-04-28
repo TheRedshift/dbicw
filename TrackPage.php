@@ -64,7 +64,7 @@ $conn->close();
     <h1>Add a track to the database.</h1> <br><br>
     <p>
         Track title:
-        <input type="text" name="track" />
+        <input type="text" name="track" required minlength="1"/>
     </p>
 
     <p>
@@ -101,7 +101,7 @@ $conn->close();
 
     <p>
         Track runtime(seconds) :
-        <input type="number" min =0 step = 1 name="runtime" />
+        <input type="number" min =0 step = 1 name="runtime" required minlength="1"/>
     </p>
 
     <p>
