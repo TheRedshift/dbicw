@@ -25,16 +25,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "delete from cd where cdID = $temp";
+$sql = "delete from tracks where trackID = $temp";
 $result = $conn->query($sql);
 
 if (!$result)
 {
-    header('Location:CdPage.php?success=-2');
+    header('Location: TrackPage.php?success=-2');
 }
 else
 {
-    header('Location:CdPage.php?success=2');
+    header('Location: TrackPage.php?success=2');
 }
 
 $conn->close();

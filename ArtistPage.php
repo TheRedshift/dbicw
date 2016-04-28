@@ -21,7 +21,7 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
 }
 else if ( isset($_GET['success']) && $_GET['success'] == -2 )
 {
-    $message = "Deleting entry failed - please try again.";
+    $message = "Deleting entry failed - are you sure there are no cds on the system with this artist?";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 else if ( isset($_GET['success']) && $_GET['success'] == 2 )

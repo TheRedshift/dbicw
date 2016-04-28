@@ -19,7 +19,16 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
     $message = "Something appears to have gone wrong - please try again.";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
-
+else if ( isset($_GET['success']) && $_GET['success'] == -2 )
+{
+    $message = "Deleting entry failed - are you sure there are no tracks on the system with this cd?";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == 2 )
+{
+    $message = "Entry successfully deleted.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
 ?>
 
 <body>
@@ -43,12 +52,14 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     echo "<table><tr><th>cdID</th><th>artID</th>
             <th>cdTitle</th><th>cdPrice</th>
-            <th>cdGenre</th><th>cdTracks</th></tr>";
+            <th>cdGenre</th><th>cdTracks</th><th>Remove</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        $temp = 'deleteCd.php?delete='.$row["cdID"];
         echo "<tr><td>".$row["cdID"]."</td><td>".$row["artID"].
             "</td><td>".$row["cdTitle"]."</td><td>"."£" . $row["cdPrice"] /100 .
-            "</td><td>".$row["cdGenre"]."</td><td>".$row["cdTracks"];
+            "</td><td>".$row["cdGenre"]."</td><td>".$row["cdTracks"]
+            ."</td><td>"."<a href='$temp'>Delete Entry</a>";
     }
     echo "</table>";
 } else {

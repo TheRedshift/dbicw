@@ -19,6 +19,16 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
     $message = "Something appears to have gone wrong - please try again.";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
+else if ( isset($_GET['success']) && $_GET['success'] == -2 )
+{
+    $message = "Deleting entry failed - please try again.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == 2 )
+{
+    $message = "Entry successfully deleted.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
 
 ?>
 
@@ -41,11 +51,13 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table><tr><th>trackID</th><th>cdID</th>
-            <th>trackTitle</th><th>trackRuntime</th>";
+            <th>trackTitle</th><th>trackRuntime</th><th>Remove</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
+        $temp = 'deleteTrack.php?delete='.$row["trackID"];
         echo "<tr><td>".$row["trackID"]."</td><td>".$row["cdID"].
-            "</td><td>".$row["trackTitle"]."</td><td>".$row["trackRuntime"];
+            "</td><td>".$row["trackTitle"]."</td><td>".$row["trackRuntime"]
+            ."</td><td>"."<a href='$temp'>Delete Entry</a>";
     }
     echo "</table>";
 } else {
