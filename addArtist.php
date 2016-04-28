@@ -16,11 +16,18 @@ if ($stmt = $conn->prepare($sql))
 {
     $stmt->bind_param('s', $artistName);
     $result = $stmt->execute();
-    if (!$result) echo "failed to insert record";
+    if (!$result) {
+        echo "failed to insert record";
+        header('Location: ArtistPage.php?success=-1');
+    }
+    else{
+        header('Location: ArtistPage.php?success=1');
+    }
 }
 else
 {
     echo htmlspecialchars($conn->error);
+    header('Location: ArtistPage.php?success=-1');
 }
 
-header('Location: ArtistPage.php?success=1');
+

@@ -49,11 +49,18 @@ if ($stmt = $conn->prepare($sql))
     $stmt->bind_param('isisi', $artID, $cdTitle, $cdPrice, $cdGenre, $cdTracks);
 
     $result = $stmt->execute();
-    if (!$result) echo "failed to insert record - are you sure the artist is in the system?";
+    if (!$result) {
+        echo "failed to insert record - are you sure the artist is in the system?";
+        header('Location: CdPage.php?success=-1');
+    }
+    else{
+        header('Location: CdPage.php?success=1');
+    }
 }
 else
 {
     echo htmlspecialchars($conn->error);
+    header('Location: CdPage.php?success=-1');
 }
 
 

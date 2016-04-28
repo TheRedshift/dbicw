@@ -7,13 +7,57 @@
 
 <?php
 include('background.php');
+
+if ( isset($_GET['success']) && $_GET['success'] == 1 )
+{
+    // treat the success case ex:
+    $message = "CD Successfully added!";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == -1 )
+{
+    $message = "Something appears to have gone wrong - please try again.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+
 ?>
 
 <body>
 
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "DBICW";
 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+$sql = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd";
+$result = $conn->query($sql);
 
+if ($result->num_rows > 0) {
+    echo "<table><tr><th>cdID</th><th>artID</th>
+            <th>cdTitle</th><th>cdPrice</th>
+            <th>cdGenre</th><th>cdTracks</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["cdID"]."</td><td>".$row["artID"].
+            "</td><td>".$row["cdTitle"]."</td><td>"."£" . $row["cdPrice"] /100 .
+            "</td><td>".$row["cdGenre"]."</td><td>".$row["cdTracks"];
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
+
+<br>
 
 <form action="addCD.php">
 

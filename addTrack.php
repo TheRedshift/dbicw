@@ -40,10 +40,17 @@ if ($stmt = $conn->prepare($sql))
     $stmt->bind_param('sii', $trackTitle, $cdID, $trackRuntime);
 
     $result = $stmt->execute();
-    if (!$result) echo "failed to insert record - are you sure the CD is in the system?";
+    if (!$result){
+        echo "failed to insert record - are you sure the CD is in the system?";
+        header('Location: TrackPage.php?success=-1');
+    }
+    else{
+        header('Location: TrackPage.php?success=1');
+    }
 }
 else
 {
     echo htmlspecialchars($conn->error);
+    header('Location: TrackPage.php?success=-1');
 }
 

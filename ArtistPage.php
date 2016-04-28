@@ -62,7 +62,7 @@ else if ( isset($_GET['success']) && $_GET['success'] == -1 )
 
     <p>
         Artist name:
-        <input type="text" name="artist" autofocus minlength="1" maxlength="254" required/>
+        <input type="text" name="artist" autofocus minlength="1" maxlength="99" required/>
     </p>
 
     <p>
