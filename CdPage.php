@@ -61,17 +61,25 @@ $sql = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>cdID</th><th>artID</th>
+    echo "<table><tr><th>cdID</th><th>Artist</th>
             <th>cdTitle</th><th>cdPrice</th>
-            <th>cdGenre</th><th>cdTracks</th><th>Remove</th><th>Edit entry</th></tr>";
+            <th>cdGenre</th><th>cdTracks</th><th>Tracks</th>
+            <th>Remove</th><th>Edit entry</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
         $temp = 'deleteCd.php?delete='.$row["cdID"];
         $editTemp = 'editCD.php?edit='.$row["cdID"];
-        echo "<tr><td>".$row["cdID"]."</td><td>".$row["artID"].
-            "</td><td>".$row["cdTitle"]."</td><td>"."£" . $row["cdPrice"] /100 .
-            "</td><td>".$row["cdGenre"]."</td><td>".$row["cdTracks"]
-            ."</td><td>"."<a href='$temp'>Delete Entry</a></td>
+        $view = 'singleCD.php?edit='.$row["cdID"];
+        $currentArtist = $row["artID"];
+        $sql2 = "SELECT artName from artist WHERE artID = '$currentArtist'";
+        $result2 = $conn->query($sql2);
+        $currentName = $result2->fetch_assoc();
+        echo "<tr>
+            <td>".$row["cdID"]."</td><td>".$currentName["artName"]."</td>
+            <td>".$row["cdTitle"]."</td><td>"."£" . $row["cdPrice"] /100 ."</td>
+            <td>".$row["cdGenre"]."</td><td>".$row["cdTracks"]."</td>
+            <td>"."<a href='$view'>View tracks</a></td>
+            <td>"."<a href='$temp'>Delete Entry</a></td>
             <td><a href='$editTemp'>Edit Entry</a></td>";
     }
     echo "</table>";

@@ -69,15 +69,19 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<table><tr><th>artID</th><th>artName</th><th>Remove</th><th>Edit entry</th></tr>";
+        echo "<table><tr><th>artID</th><th>artName</th><th>Albums</th>
+<th>Remove</th><th>Edit entry</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc())
         {
             $temp = 'deleteArtist.php?delete='.$row["artID"];
             $editTemp = 'editArtist.php?edit='.$row["artID"];
+            $view = 'singleArtist.php?target='.$row["artID"];
 
-            echo "<tr><td>".$row["artID"]."</td><td>".$row["artName"]
-                ."</td><td>"."<a href='$temp'>Delete Entry</a></td>
+            echo "<tr><td>".$row["artID"]."</td>
+                <td>".$row["artName"]."</td>
+                <td>"."<a href='$view'>View albums</a></td>
+                <td>"."<a href='$temp'>Delete Entry</a></td>
                 <td>"."<a href='$editTemp'>Edit Entry</a></td>";
         }
         echo "</table>";
