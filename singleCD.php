@@ -80,20 +80,20 @@ $conn->close();
 
     $('table').each(function() {
         var cTable = $(this);
-        var cRows = cTable.find('tr:gt(0)');
-        var cRowCount = cRows.size();
+        var iRows = cTable.find('tr:gt(0)');
+        var cRowCount = iRows.size();
 
         if (cRowCount < maxRows) {
             return;
         }
 
-        cRows.each(function(i) {
+        iRows.each(function(i) {
             $(this).find('td:first').text(function(j, val) {
                 return (i + 1) + " - " + val;
             });
         });
 
-        cRows.filter(':gt(' + (maxRows - 1) + ')').hide();
+        iRows.filter(':gt(' + (maxRows - 1) + ')').hide();
 
 
         var cPrev = cTable.siblings('.prev');
@@ -102,17 +102,17 @@ $conn->close();
         cPrev.addClass('disabled');
 
         cPrev.click(function() {
-            var cFirstVisible = cRows.index(cRows.filter(':visible'));
+            var cFirstVisible = iRows.index(iRows.filter(':visible'));
 
             if (cPrev.hasClass('disabled')) {
                 return false;
             }
 
-            cRows.hide();
+            iRows.hide();
             if (cFirstVisible - maxRows - 1 > 0) {
-                cRows.filter(':lt(' + cFirstVisible + '):gt(' + (cFirstVisible - maxRows - 1) + ')').show();
+                iRows.filter(':lt(' + cFirstVisible + '):gt(' + (cFirstVisible - maxRows - 1) + ')').show();
             } else {
-                cRows.filter(':lt(' + cFirstVisible + ')').show();
+                iRows.filter(':lt(' + cFirstVisible + ')').show();
             }
 
             if (cFirstVisible - maxRows <= 0) {
@@ -125,16 +125,16 @@ $conn->close();
         });
 
         cNext.click(function() {
-            var cFirstVisible = cRows.index(cRows.filter(':visible'));
+            var cFirstVisible = iRows.index(iRows.filter(':visible'));
 
             if (cNext.hasClass('disabled')) {
                 return false;
             }
 
-            cRows.hide();
-            cRows.filter(':lt(' + (cFirstVisible +2 * maxRows) + '):gt(' + (cFirstVisible + maxRows - 1) + ')').show();
+            iRows.hide();
+            iRows.filter(':lt(' + (cFirstVisible +2 * maxRows) + '):gt(' + (cFirstVisible + maxRows - 1) + ')').show();
 
-            if (cFirstVisible + 2 * maxRows >= cRows.size()) {
+            if (cFirstVisible + 2 * maxRows >= iRows.size()) {
                 cNext.addClass('disabled');
             }
 
