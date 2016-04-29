@@ -47,15 +47,27 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
 
 <form action="searchArtist.php">
 
+    <h1>Search for an artist-</h1>
+
+    <br><br>
+
+    <p>
+        Artist name:
+        <input type="text" name="search" autofocus minlength="1" maxlength="99" required/>
+    </p>
 
 
-
-
-
-
+    <p>
+        <input type="submit" value="Confirm" />
+    </p>
 
 
 </form>
+
+
+
+<br><br>
+
 
 <form action="addArtist.php">
 
