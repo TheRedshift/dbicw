@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CDs</title>
+    <title>Search results</title>
 </head>
 
 <?php
@@ -29,10 +29,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd WHERE cdTitle LIKE '%$target%'";
-$result = $conn->query($sql);
+$sql4 = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd WHERE cdTitle LIKE ?";
 
-if ($result->num_rows > 0) {
+$param = '%'.$target.'%';
+
+if ($stmt = $conn->prepare($sql4))
+{
+    $stmt->bind_param('s', $param);
+    $stmt->execute();
+    $result = $stmt->   get_result();
+
+}
+
+
+if ($result && $result->num_rows > 0) {
     echo "<table><tr><th>cdID</th><th>Artist</th>
             <th>cdTitle</th><th>cdPrice</th>
             <th>cdGenre</th><th>cdTracks</th><th>Tracks</th>
@@ -114,6 +124,7 @@ $conn->close();
             <option value="Pop">Pop</option>
             <option value="Classical">Classical</option>
             <option value="Rap">Rap</option>
+            <option value="Other">Other</option>
         </select>
     </p>
 

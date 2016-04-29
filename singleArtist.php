@@ -125,6 +125,7 @@ $conn->close();
             <option value="Pop">Pop</option>
             <option value="Classical">Classical</option>
             <option value="Rap">Rap</option>
+            <option value="Other"Other</option>
         </select>
     </p>
 

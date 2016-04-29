@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CDs</title>
+    <link rel="stylesheet" type="text/css" href="homepage.css">
 </head>
 
 <?php
@@ -142,6 +143,7 @@ $conn->close();
             <option value="Pop">Pop</option>
             <option value="Classical">Classical</option>
             <option value="Rap">Rap</option>
+            <option value="Other">Other</option>
         </select>
     </p>
 

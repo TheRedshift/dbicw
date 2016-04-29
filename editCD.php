@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Artist</title>
+    <title>Edit CD</title>
 </head>
 
 
@@ -28,6 +28,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "select cdTitle,cdPrice,cdTracks from cd where cdID = $temp";
+$sql2 = "select artName from artist WHERE artId = (SELECT artID from cd where cdID = $temp)";
 $result = $conn->query($sql);
 
 if (!$result)
@@ -40,6 +41,21 @@ else{
         $cdTitle = $cdEdit["cdTitle"];
         $cdPrice = $cdEdit["cdPrice"];
         $cdTracks = $cdEdit["cdTracks"];
+
+    }
+
+
+}
+
+$result2 = $conn->query($sql2);
+if (!$result2)
+{
+    header('Location: ArtistPage.php?success=-3');
+}
+else{
+    while ($artEdit = mysqli_fetch_array($result2))
+    {
+        $artName = $artEdit["artName"];
 
     }
 
@@ -81,9 +97,12 @@ else{
             <?php
 
             foreach($array as $key =>$value)
-            {?>
+            {
+                if ($value = $artName){
+                    ?><option selected= "selected" value="<?=$value?>"><?=$value?></option><?php
+                }
 
-                <option value="<?=$value?>"><?=$value?></option>
+                ?><option value="<?=$value?>"><?=$value?></option>
                 <?php
             } ?>
         </select>
@@ -102,6 +121,7 @@ else{
             <option value="Pop">Pop</option>
             <option value="Classical">Classical</option>
             <option value="Rap">Rap</option>
+            <option value="Other">Other</option>
         </select>
     </p>
 

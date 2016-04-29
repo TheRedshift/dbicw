@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CDs</title>
+    <title>Search results</title>
+    <link rel="stylesheet" type="text/css" href="homepage.css">
 </head>
 
 <body>
@@ -55,7 +56,7 @@ if ($stmt = $conn->prepare($sql4))
 }
 
 
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     echo "<table><tr><th>artID</th><th>artName</th><th>Albums</th>
                 <th>Remove</th><th>Edit entry</th></tr>";
     // output data of each row

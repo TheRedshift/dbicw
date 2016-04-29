@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tracks</title>
+    <title>Search results</title>
 </head>
 
 <?php
@@ -31,10 +31,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT trackID,cdID,trackTitle,trackRuntime FROM tracks WHERE trackTitle LIKE '%$target%'";
-$result = $conn->query($sql);
+$sql4 = "SELECT trackID,cdID,trackTitle,trackRuntime FROM tracks WHERE trackTitle LIKE ?";
+$param = '%'.$target.'%';
 
-if ($result->num_rows > 0) {
+if ($stmt = $conn->prepare($sql4))
+{
+    $stmt->bind_param('s', $param);
+    $stmt->execute();
+    $result = $stmt->   get_result();
+
+}
+if ($result && $result->num_rows > 0) {
     echo "<table><tr><th>trackID</th><th>CD title</th>
             <th>trackTitle</th><th>trackRuntime</th><th>Remove</th><th>Edit entry</th></tr>";
     // output data of each row
