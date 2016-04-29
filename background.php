@@ -31,7 +31,7 @@
     <li><a href="CdPage.php">CDs</a></li>
     <li><a href="TrackPage.php">Tracks</a></li>
     <li><a href="Homepage.php">Home</a></li>
-    <li><a style="background-image: none;" href="#">About</a></li>
+    <li><a style="background-image: none;" href="about.php">About</a></li>
 </ul>
 
 <br>

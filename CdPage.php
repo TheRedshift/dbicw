@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $temp = 'deleteCd.php?delete='.$row["cdID"];
         $editTemp = 'editCD.php?edit='.$row["cdID"];
-        $view = 'singleCD.php?edit='.$row["cdID"];
+        $view = 'singleCD.php?target='.$row["cdID"];
         $currentArtist = $row["artID"];
         $sql2 = "SELECT artName from artist WHERE artID = '$currentArtist'";
         $result2 = $conn->query($sql2);
@@ -93,7 +93,7 @@ $conn->close();
 
 <form action="addCD.php">
 
-    <h1>Add a CD to the database.</h1> <br><br>
+    <h1>Add a CD to the database-</h1> <br><br>
     <p>
         CD title:
         <input type="text" name="cd" required minlength="1"/>

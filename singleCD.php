@@ -1,18 +1,17 @@
-<!DOCTYPE php>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CDs</title>
+    <title>Tracks</title>
 </head>
 
 <?php
 include('background.php');
+
 $target = $_GET["target"];
-?>
 
-<body>
 
-<?php
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -25,20 +24,37 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd WHERE cdID = '$target'";
+
+$sql3 = "SELECT cdTitle FROM cd WHERE cdID = '$target'";
+$result3 = $conn->query($sql3);
+
+$titleTemp = $result3->fetch_assoc();
+
+?>
+
+<h1>All songs from <?php echo $titleTemp["cdTitle"]?></h1>
+
+<br><br>
+
+<?php
+
+
+$sql = "SELECT trackID,cdID,trackTitle,trackRuntime FROM tracks WHERE cdID = '$target'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>cdID</th><th>artID</th>
-            <th>cdTitle</th><th>cdPrice</th>
-            <th>cdGenre</th><th>cdTracks</th><th>Remove</th><th>Edit entry</th></tr>";
+    echo "<table><tr><th>trackID</th><th>CD title</th>
+            <th>trackTitle</th><th>trackRuntime</th><th>Remove</th><th>Edit entry</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $temp = 'deleteCd.php?delete='.$row["cdID"];
-        $editTemp = 'editCD.php?edit='.$row["cdID"];
-        echo "<tr><td>".$row["cdID"]."</td><td>".$row["artID"].
-            "</td><td>".$row["cdTitle"]."</td><td>"."£" . $row["cdPrice"] /100 .
-            "</td><td>".$row["cdGenre"]."</td><td>".$row["cdTracks"]
+        $temp = 'deleteTrack.php?delete='.$row["trackID"];
+        $editTemp = 'editTrack.php?edit='.$row["trackID"];
+        $currentCD = $row["cdID"];
+        $sql2 = "SELECT cdTitle from cd WHERE cdID = '$currentCD'";
+        $result2 = $conn->query($sql2);
+        $currentCD = $result2->fetch_assoc();
+        echo "<tr><td>".$row["trackID"]."</td><td>".$currentCD["cdTitle"].
+            "</td><td>".$row["trackTitle"]."</td><td>".$row["trackRuntime"]
             ."</td><td>"."<a href='$temp'>Delete Entry</a></td>
             <td><a href='$editTemp'>Edit Entry</a></td>";
     }
@@ -49,14 +65,17 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 
+
+<body>
+
 <br><br>
 
-<form action="addCD.php">
+<form action="addTrack.php">
 
-    <h1>Add a CD to the database.</h1> <br><br>
+    <h1>Add a track to the database-</h1> <br><br>
     <p>
-        CD title:
-        <input type="text" name="cd" required minlength="1"/>
+        Track title:
+        <input type="text" name="track" required minlength="1"/>
     </p>
 
     <p>
@@ -64,18 +83,18 @@ $conn->close();
         <!-- Modified from stackoverflow code - 23546818 -->
         <?php
         include 'db.php';
-        $stmt = $conn->prepare("SELECT artName FROM artist");
+        $stmt = $conn->prepare("SELECT cdTitle FROM cd");
         $stmt->execute();
         $array = [];
 
 
         foreach ($stmt->get_result() as $row)
         {
-            $array[] = $row['artName'];
+            $array[] = $row['cdTitle'];
         }
         ?>
-        Artist:
-        <select name="artist" id="artist" required>
+        CD:
+        <select name="cd" id="cd">
             <option selected="selected">Choose one</option>
 
             <?php
@@ -90,24 +109,10 @@ $conn->close();
 
     </p>
 
-    <p>
-        CD Price (pennies):
-        <input type="number" min = 0 step = 1 name = "price" required/>
-    </p>
 
     <p>
-        Genre:
-        <select name="genre">
-            <option value="Rock">Rock</option>
-            <option value="Pop">Pop</option>
-            <option value="Classical">Classical</option>
-            <option value="Rap">Rap</option>
-        </select>
-    </p>
-
-    <p>
-        Number of tracks:
-        <input type="number" min = 1 step = 1 name = "tracks" required/>
+        Track runtime(seconds) :
+        <input type="number" min =0 step = 1 name="runtime" required minlength="1"/>
     </p>
 
     <p>
@@ -117,4 +122,3 @@ $conn->close();
 
 </body>
 </html>
-

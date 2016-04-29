@@ -93,7 +93,7 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
 
     <br><br>
 
-    <h1>Add an artist to the database.</h1>
+    <h1>Add an artist to the database-</h1>
 
     <br><br>
 

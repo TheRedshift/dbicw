@@ -5,12 +5,11 @@
     <title>CDs</title>
 </head>
 
-<?php
-include('background.php');
-$target = $_GET["target"];
-?>
-
 <body>
+
+
+
+
 
 <?php
 $servername = "localhost";
@@ -25,6 +24,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+include('background.php');
+$target = $_GET["target"];
+
+$sql3 = "SELECT artName FROM artist WHERE artID = '$target'";
+$result3 = $conn->query($sql3);
+
+$titleTemp = $result3->fetch_assoc();
+
+?>
+
+<h1>All albums by <?php echo $titleTemp["artName"]?></h1>
+
+<br><br>
+
+<?php
+
 $sql = "SELECT cdID,artID,cdTitle,cdPrice,cdGenre,cdTracks FROM cd WHERE artID = '$target'";
 $result = $conn->query($sql);
 
@@ -37,7 +52,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $temp = 'deleteCd.php?delete='.$row["cdID"];
         $editTemp = 'editCD.php?edit='.$row["cdID"];
-        $view = 'singleCD.php?edit='.$row["cdID"];
+        $view = 'singleCD.php?target='.$row["cdID"];
         $currentArtist = $row["artID"];
         $sql2 = "SELECT artName from artist WHERE artID = '$currentArtist'";
         $result2 = $conn->query($sql2);
@@ -61,7 +76,7 @@ $conn->close();
 
 <form action="addCD.php">
 
-    <h1>Add a CD to the database.</h1> <br><br>
+    <h1>Add a CD to the database-</h1> <br><br>
     <p>
         CD title:
         <input type="text" name="cd" required minlength="1"/>

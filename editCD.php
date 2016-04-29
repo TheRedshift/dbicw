@@ -53,7 +53,7 @@ else{
 
 <form action="editCDScript.php">
 
-    <h1>Edit a CD already in the database.</h1> <br><br>
+    <h1>Edit a CD already in the database-</h1> <br><br>
     <p>
         CD title:
         <input type="text" name="cd" value = "<?php echo $cdTitle?>" required minlength="1"/>

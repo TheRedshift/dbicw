@@ -52,7 +52,7 @@ else{
 
 <form action="editTrackScript.php">
 
-    <h1>Edit a track already in the database.</h1> <br><br>
+    <h1>Edit a track already in the database-</h1> <br><br>
     <p>
         Track title:
         <input type="text" name="track" value="<?php echo $trackTitle?>" required minlength="1"/>

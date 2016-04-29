@@ -50,7 +50,7 @@ else{
 
 <form action="editArtistScript.php">
 
-    <h1>Edit an artist that is already in the database.</h1>
+    <h1>Edit an artist that is already in the database-</h1>
 
     <br><br>
 
