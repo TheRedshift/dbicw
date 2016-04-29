@@ -25,6 +25,7 @@ if ($conn->connect_error) {
 }
 
 include('background.php');
+include 'db.php';
 $target = $_GET["search"];
 
 $sql3 = "SELECT * FROM artist WHERE artName = '$target'";
@@ -40,8 +41,19 @@ $titleTemp = $result3->fetch_assoc();
 
 <?php
 
-$sql = "SELECT artID,artName FROM artist WHERE artName ='$target'";
-$result = $conn->query($sql);
+$sql4 = "SELECT artID,artName FROM artist WHERE artName LIKE ?";
+
+
+$param = '%'.$target.'%';
+
+if ($stmt = $conn->prepare($sql4))
+{
+    $stmt->bind_param('s', $param);
+    $stmt->execute();
+    $result = $stmt->   get_result();
+
+}
+
 
 if ($result->num_rows > 0) {
     echo "<table><tr><th>artID</th><th>artName</th><th>Albums</th>
