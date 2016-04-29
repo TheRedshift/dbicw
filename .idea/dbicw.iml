@@ -24,8 +24,10 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jquery" level="project" />
     <orderEntry type="library" name="jquery-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="jqueryui-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="jquery-2.1.1" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
 </module>

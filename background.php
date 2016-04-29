@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="homepage.css">
     <meta charset="UTF-8">
     <title>The Compendium</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
 </head>
 
 <body>
@@ -19,6 +20,7 @@
 </ul>
 
 <br>
+
 
 
 <div class="searches">
