@@ -51,13 +51,15 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo "<table><tr><th>trackID</th><th>cdID</th>
-            <th>trackTitle</th><th>trackRuntime</th><th>Remove</th></tr>";
+            <th>trackTitle</th><th>trackRuntime</th><th>Remove</th><th>Edit entry</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
         $temp = 'deleteTrack.php?delete='.$row["trackID"];
+        $editTemp = 'editTrack.php?edit='.$row["trackID"];
         echo "<tr><td>".$row["trackID"]."</td><td>".$row["cdID"].
             "</td><td>".$row["trackTitle"]."</td><td>".$row["trackRuntime"]
-            ."</td><td>"."<a href='$temp'>Delete Entry</a>";
+            ."</td><td>"."<a href='$temp'>Delete Entry</a></td>
+            <td><a href='$editTemp'>Edit Entry</a></td>";
     }
     echo "</table>";
 } else {
