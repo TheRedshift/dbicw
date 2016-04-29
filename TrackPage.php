@@ -29,7 +29,16 @@ else if ( isset($_GET['success']) && $_GET['success'] == 2 )
     $message = "Entry successfully deleted.";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
-
+else if ( isset($_GET['success']) && $_GET['success'] == -3 )
+{
+    $message = "Editing entry failed - please try again.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
+else if ( isset($_GET['success']) && $_GET['success'] == 3 )
+{
+    $message = "Entry successfully edited.";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+}
 ?>
 
 
@@ -119,7 +128,7 @@ $conn->close();
     </p>
 
     <p>
-        <input type="submit" value="Insert" />
+        <input type="submit" value="Confirm" />
     </p>
 </form>
 

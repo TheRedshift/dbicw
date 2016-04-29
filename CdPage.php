@@ -143,7 +143,7 @@ $conn->close();
     </p>
 
     <p>
-        <input type="submit" value="Insert" />
+        <input type="submit" value="Confirm" />
     </p>
 </form>
 

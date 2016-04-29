@@ -99,7 +99,7 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
     </p>
 
     <p>
-        <input type="submit" value="Insert" />
+        <input type="submit" value="Confirm" />
     </p>
 </form>
 

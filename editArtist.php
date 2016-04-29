@@ -63,7 +63,7 @@ else{
         <input type="hidden"  name="artID" value="<?php echo $temp?>"  required />
 
     <p>
-        <input type="submit" value="Insert" />
+        <input type="submit" value="Confirm" />
     </p>
 </form>
 

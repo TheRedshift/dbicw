@@ -27,7 +27,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "select artName from artist where artID = $temp";
+$sql = "select trackTitle, trackRuntime from tracks where trackID = $temp";
 $result = $conn->query($sql);
 
 if (!$result)
@@ -35,9 +35,11 @@ if (!$result)
     header('Location: ArtistPage.php?success=-3');
 }
 else{
-    while ($artName = mysqli_fetch_array($result))
+    while ($trackEdit = mysqli_fetch_array($result))
     {
-        $printName = $artName["artName"];
+        $trackTitle = $trackEdit["trackTitle"];
+        $trackRuntime = $trackEdit["trackRuntime"];
+
     }
 
 
@@ -48,22 +50,53 @@ else{
 
 
 
-<form action="editArtistScript.php">
+<form action="editTrackScript.php">
 
-    <h1>Edit an artist that is already in the database.</h1>
-
-    <br><br>
-
+    <h1>Edit a track already in the database.</h1> <br><br>
     <p>
-        Artist name:
-        <input type="text" name="artist" value = "<?php echo $printName?>"
-               autofocus minlength="1" maxlength="99" required/>
+        Track title:
+        <input type="text" name="track" value="<?php echo $trackTitle?>" required minlength="1"/>
     </p>
 
-    <input type="hidden"  name="artID" value="<?php echo $temp?>"  required />
+    <p>
+
+        <!-- Modified from stackoverflow code - 23546818 -->
+        <?php
+        include 'db.php';
+        $stmt = $conn->prepare("SELECT cdTitle FROM cd");
+        $stmt->execute();
+        $array = [];
+
+
+        foreach ($stmt->get_result() as $row)
+        {
+            $array[] = $row['cdTitle'];
+        }
+        ?>
+        CD:
+        <select name="cd" id="cd">
+            <option selected="selected">Choose one</option>
+
+            <?php
+
+            foreach($array as $key =>$value)
+            {?>
+
+                <option value="<?=$value?>"><?=$value?></option>
+                <?php
+            } ?>
+        </select>
+
+    </p>
+
 
     <p>
-        <input type="submit" value="Insert" />
+        Track runtime(seconds) :
+        <input type="number" min =0 step = 1 name="runtime" value="<?php echo $trackRuntime?>" required minlength="1"/>
+    </p>
+        <input type="hidden"  name="trackID" value="<?php echo $temp?>"  required />
+    <p>
+        <input type="submit" value="Confirm" />
     </p>
 </form>
 

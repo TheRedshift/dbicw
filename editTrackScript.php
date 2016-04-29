@@ -10,14 +10,19 @@
 
 include 'db.php';
 
-$temp = $_GET['artist'];
-$tempID = $_GET['artID'];
+$trackTitle = $_GET["track"];
+$trackRuntime = $_GET["runtime"];
+$trackID = $_GET["trackID"];
+$cdName = $_GET["cd"];
 
 
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "DBICW";
+
+
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,17 +31,40 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "update artist set artName = '$temp' where artID = '$tempID'";
+
+$sql1 = "SELECT cdID FROM cd WHERE cdTitle ='$cdName' ";
+
+
+
+
+
+$result1 = $conn->query($sql1);
+
+while ($row = $result1->fetch_array(MYSQLI_NUM))
+{
+    foreach ($row as $r)
+    {
+        $cdID = $r;
+    }
+    print "\n";
+}
+
+if (!$result1) echo "failed to search record - are you sure the artist is in the system?";
+
+$sql = "update tracks set cdID = '$cdID', trackTitle = '$trackTitle', trackRuntime = '$trackRuntime'
+        where trackID = '$trackID'";
 
 $result = $conn->query($sql);
 
+
+
 if (!$result)
 {
-    header('Location: TrackPage.php?success=-3');
+    header('Location: trackPage.php?success=-3');
 }
 else
 {
-    header('Location: TrackPage.php?success=3');
+    header('Location: trackPage.php?success=3');
 }
 
 $conn->close();
