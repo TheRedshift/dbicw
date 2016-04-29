@@ -7,6 +7,12 @@ body {
     margin: 0;
     padding: 0;
 }
+.ui-dialog-osx {
+    -moz-border-radius: 0 0 8px 8px;
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px; border-width: 0 8px 8px 8px;
+}
+
 
 ul {
     list-style-type: none;

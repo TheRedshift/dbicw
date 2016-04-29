@@ -9,7 +9,7 @@
 <?php
 include('background.php');
 ?>
-
+<body>
 
 <h1>System for DBI coursework 2 by Rahul Soni - student number 4255222.</h1>
 <br><br>

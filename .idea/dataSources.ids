@@ -3,4 +3,7 @@
   <data-source name="MySQL - DBICW@localhost" uuid="3670f801-f89e-4aee-8b4b-04f4a83228bf">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source name="MySQL - http://localhost:63342/dbicw/" uuid="3aafb43a-1ca2-4c36-9cc6-47f4c9dcc687">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>
