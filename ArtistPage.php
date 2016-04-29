@@ -45,7 +45,17 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
 <body>
 
 
+<form action="searchArtist.php">
 
+
+
+
+
+
+
+
+
+</form>
 
 <form action="addArtist.php">
 
@@ -70,7 +80,7 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
 
     if ($result->num_rows > 0) {
         echo "<table><tr><th>artID</th><th>artName</th><th>Albums</th>
-<th>Remove</th><th>Edit entry</th></tr>";
+                <th>Remove</th><th>Edit entry</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc())
         {
@@ -85,6 +95,9 @@ else if ( isset($_GET['success']) && $_GET['success'] == 3 )
                 <td>"."<a href='$editTemp'>Edit Entry</a></td>";
         }
         echo "</table>";
+
+
+
     } else {
         echo "0 results";
     }
