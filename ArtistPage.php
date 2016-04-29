@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="homepage.css">
     <title>Artists</title>
+    <script src="jquery-2.2.3.min.js"></script>
+
 </head>
 
 <?php
